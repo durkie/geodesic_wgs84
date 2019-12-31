@@ -187,14 +187,14 @@ wgs84_distance(int argc, VALUE *argv, VALUE klass)
     for (i = 0; i < 4; i++)
       dbl[i] = wgs84_get_value(argv[i]);
     geod_inverse(&g, dbl[0], dbl[1], dbl[2], dbl[3], &s12, &azi1, &azi2);
-    return rb_ary_new3(2L, INT2NUM(s12), INT2NUM((int) azi1));
+    return rb_ary_new3(2L, DBL2NUM(s12), INT2NUM((int) azi1));
   }
 
   if (argc == 1 && TYPE(*argv) == T_ARRAY && RARRAY_LEN(*argv) == 4) {
     for (i = 0; i < 4; i++)
       dbl[i] = wgs84_get_value(rb_ary_entry(*argv, i));
     geod_inverse(&g, dbl[0], dbl[1], dbl[2], dbl[3], &s12, &azi1, &azi2);
-    return rb_ary_new3(2L, INT2NUM(s12), INT2NUM((int) azi1));
+    return rb_ary_new3(2L, DBL2NUM(s12), INT2NUM((int) azi1));
   }
 
   if (argc == 2) {
@@ -206,7 +206,7 @@ wgs84_distance(int argc, VALUE *argv, VALUE klass)
       dbl[2] = wgs84_get_value(rb_ary_entry(tmp2, 0));
       dbl[3] = wgs84_get_value(rb_ary_entry(tmp2, 1));
       geod_inverse(&g, dbl[0], dbl[1], dbl[2], dbl[3], &s12, &azi1, &azi2);
-      return rb_ary_new3(2L, INT2NUM(s12), INT2NUM((int) azi1));
+      return rb_ary_new3(2L, DBL2NUM(s12), INT2NUM((int) azi1));
     }
   }
 
@@ -219,7 +219,7 @@ wgs84_distance(int argc, VALUE *argv, VALUE klass)
       dbl[2] = wgs84_get_value(rb_ary_entry(tmp2, 0));
       dbl[3] = wgs84_get_value(rb_ary_entry(tmp2, 1));
       geod_inverse(&g, dbl[0], dbl[1], dbl[2], dbl[3], &s12, &azi1, &azi2);
-      return rb_ary_new3(2L, INT2NUM(s12), INT2NUM((int) azi1));
+      return rb_ary_new3(2L, DBL2NUM(s12), INT2NUM((int) azi1));
     }
   }
 
@@ -395,4 +395,3 @@ Init_geodesic_wgs84(void)
   rb_define_method(cWGS84, "average",     wgs84_average,       2);
   rb_define_method(cWGS84, "center",      wgs84_center,        2);
 }
-
